@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     //
-    use Hasfactory;
+    use HasFactory;
 
     protected $fillable = [
         'image',
@@ -19,10 +19,14 @@ class Product extends Model
         'stock',
     ];
 
-    protected function image(): Attribute
+    // protected function image(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($value) => asset('/storage/products/' . $value),
+    //     );
+    // }
+    public function getImageUrlAttribute()
     {
-        return Attribute::make(
-            get: fn ($value) => asset('storage/products/' . $value),
-        );
+        return asset('storage/' . $this->image);
     }
 }
